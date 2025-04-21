@@ -1,24 +1,28 @@
 import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import AutoLogAuth from './components/AutoLogAuth';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Dashboard from './components/Dashboard';
+import VehicleLogPage from './components/VehicleLogPage';
+import SettingsPage from './components/SettingsPage';
+import ReportsAnalyticsPage from './components/ReportsAnalyticsPage';
+import ManualEntryPage from './components/ManualEntry';
+import HelpSupport from './components/HelpSupport';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<AutoLogAuth />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/vehicle-logs" element={<VehicleLogPage />} />
+        <Route path="/manualentry" element={<ManualEntryPage />} />
+        <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/reports" element={<ReportsAnalyticsPage />} />
+        <Route path="/helpsupport" element={<HelpSupport />} />
+      </Routes>
+    </Router>
   );
 }
 

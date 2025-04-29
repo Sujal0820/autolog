@@ -9,12 +9,14 @@ import SettingsPage from './components/SettingsPage';
 import ReportsAnalyticsPage from './components/ReportsAnalyticsPage';
 import ManualEntryPage from './components/ManualEntry';
 import HelpSupport from './components/HelpSupport';
+import LandingPage from './components/LandingPage';
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<AutoLogAuth />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/autologauth" element={<AutoLogAuth />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/vehicle-logs" element={<VehicleLogPage />} />
         <Route path="/manualentry" element={<ManualEntryPage />} />

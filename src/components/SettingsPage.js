@@ -14,6 +14,10 @@ const SettingsPage = () => {
   const [profileOpen, setProfileOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const { user } = useUser();
+  // New alert states
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [alertType, setAlertType] = useState('success');
 
   // Modal states
   const [showUserModal, setShowUserModal] = useState(false);
@@ -23,7 +27,7 @@ const SettingsPage = () => {
   const [editingFee, setEditingFee] = useState(null);
   const [editUsername, setEditUsername] = useState("");
   const [editFeeAmount, setEditFeeAmount] = useState("");
-  
+
   // New user form state
   const [newUser, setNewUser] = useState({
     username: "",
@@ -74,6 +78,16 @@ const SettingsPage = () => {
     fetchRates();
   }, []);
 
+  useEffect(() => {
+    if (showAlert) {
+      const timer = setTimeout(() => {
+        setShowAlert(false);
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [showAlert]);
+
   const handleEditUserClick = (user) => {
     setEditingUser(user);
     setEditUsername(user.username);
@@ -107,10 +121,20 @@ const SettingsPage = () => {
           user.id === editingUser.id ? updatedUser : user
         );
         setUsers(updatedUsers);
+
+        setAlertType('success');
+        setAlertMessage("User updated successfully");
+        setShowAlert(true);
+
         setShowUserModal(false);
+
+
         console.log("User updated successfully");
       } else {
         const errorText = await response.text();
+        setAlertType('error');
+        setAlertMessage("Failed to update user");
+        setShowAlert(true);
         console.error("Failed to update user", errorText);
       }
     } catch (error) {
@@ -133,12 +157,21 @@ const SettingsPage = () => {
         setUsers([...users, addedUser]);
         setShowAddUserModal(false);
         setNewUser({ username: "", email: "", role: "user", password: "" });
+
+        setAlertType('success');
+        setAlertMessage("User added successfully");
+        setShowAlert(true);
+
         console.log("User added successfully");
       } else {
         const errorText = await response.text();
         console.error("Failed to add user", errorText);
       }
     } catch (error) {
+
+      setAlertType('error');
+      setAlertMessage("Error adding user:");
+      setShowAlert(true);
       console.error("Error adding user:", error);
     }
   };
@@ -172,8 +205,18 @@ const SettingsPage = () => {
         );
         setParkingRates(updatedRates);
         setShowFeeModal(false);
+
+        setAlertType('success');
+        setAlertMessage("Fee updated successfully");
+        setShowAlert(true);
+
         console.log("Fee updated successfully");
       } else {
+
+        setAlertType('error');
+        setAlertMessage("Failed to update fee");
+        setShowAlert(true);
+
         console.error("Failed to update fee");
       }
     } catch (error) {
@@ -194,7 +237,7 @@ const SettingsPage = () => {
               <X size={20} />
             </button>
           </div>
-          
+
           <div className="space-y-4">
             <div>
               <label className={`block text-sm font-medium mb-1 ${darkMode ? 'text-white' : 'text-gray-700'}`}>Username</label>
@@ -207,7 +250,7 @@ const SettingsPage = () => {
                 placeholder="Enter username"
               />
             </div>
-            
+
             <div>
               <label className={`block text-sm font-medium mb-1 ${darkMode ? 'text-white' : 'text-gray-700'}`}>Email</label>
               <input
@@ -219,7 +262,7 @@ const SettingsPage = () => {
                 placeholder="Enter email"
               />
             </div>
-            
+
             <div>
               <label className={`block text-sm font-medium mb-1 ${darkMode ? 'text-white' : 'text-gray-700'}`}>Password</label>
               <input
@@ -231,7 +274,7 @@ const SettingsPage = () => {
                 placeholder="Enter password"
               />
             </div>
-            
+
             <div>
               <label className={`block text-sm font-medium mb-1 ${darkMode ? 'text-white' : 'text-gray-700'}`}>Role</label>
               <select
@@ -245,7 +288,7 @@ const SettingsPage = () => {
               </select>
             </div>
           </div>
-          
+
           <div className="flex justify-end mt-6">
             <button
               onClick={handleAddUser}
@@ -343,7 +386,7 @@ const SettingsPage = () => {
       <h3 className={`text-xl font-semibold mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>User Management</h3>
 
       <div className="mb-4">
-        <button 
+        <button
           className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded inline-flex items-center"
           onClick={() => setShowAddUserModal(true)}
         >
@@ -466,7 +509,7 @@ const SettingsPage = () => {
     <div className={`flex h-screen ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100'}`}>
       {/* Sidebar - kept the same as in the Dashboard */}
       <aside className={`bg-gray-800 text-white w-64 space-y-6 py-7 px-2 absolute inset-y-0 left-0 transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:relative md:translate-x-0 transition duration-200 ease-in-out`}>
-        <nav>
+        <nav className='mt-20'>
           <button className="w-full text-left py-2 px-4 text-white hover:bg-gray-700" onClick={() => navigate('/dashboard')}>Dashboard</button>
           <button className="w-full text-left py-2 px-4 text-white hover:bg-gray-700" onClick={() => navigate('/vehicle-logs')}>Vehicle Logs</button>
           <button className="w-full text-left py-2 px-4 text-white hover:bg-gray-700" onClick={() => navigate('/manualentry')}>Manual Vehicle Entry</button>
@@ -487,9 +530,7 @@ const SettingsPage = () => {
               <h1 className={`text-xl font-semibold ${darkMode ? 'text-white' : 'text-gray-800'} ml-2`}>AutoLog Settings</h1>
             </div>
             <div className="flex items-center space-x-4">
-              <button className={`p-2 rounded-full ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-200'}`}>
-                <Bell className="h-5 w-5" />
-              </button>
+              
               <div className="relative">
                 <button
                   className={`p-2 rounded-full ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-200'}`}
@@ -497,14 +538,14 @@ const SettingsPage = () => {
                 >
                   <User className="h-5 w-5" />
                 </button>
-                
+
                 {profileOpen && (
                   <div className={`absolute right-0 mt-2 w-48 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border rounded-md shadow-lg z-50`}>
                     <div className={`flex items-center space-x-2 p-4 border-b ${darkMode ? 'border-gray-700' : 'border-gray-100'}`}>
                       <User className={`h-6 w-6 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`} />
                       <span className={`font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{user.username}</span>
                     </div>
-                    <button 
+                    <button
                       onClick={() => navigate('/')}
                       className={`w-full text-left px-4 py-2 text-sm ${darkMode ? 'hover:bg-gray-700 text-gray-300' : 'hover:bg-gray-100 text-gray-700'}`}
                     >
@@ -513,8 +554,8 @@ const SettingsPage = () => {
                   </div>
                 )}
               </div>
-              <button 
-                onClick={toggleDarkMode} 
+              <button
+                onClick={toggleDarkMode}
                 className={`p-2 rounded-full ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-200'}`}
               >
                 {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
@@ -547,15 +588,14 @@ const SettingsPage = () => {
                     <button
                       key={tab}
                       onClick={() => setActiveTab(tab)}
-                      className={`${
-                        activeTab === tab
-                          ? darkMode 
-                              ? 'bg-blue-900 text-blue-200' 
-                              : 'bg-blue-100 text-blue-700'
-                          : darkMode 
-                              ? 'text-gray-400 hover:text-gray-200' 
-                              : 'text-gray-500 hover:text-gray-700'
-                      } px-3 py-2 font-medium text-sm rounded-md`}
+                      className={`${activeTab === tab
+                        ? darkMode
+                          ? 'bg-blue-900 text-blue-200'
+                          : 'bg-blue-100 text-blue-700'
+                        : darkMode
+                          ? 'text-gray-400 hover:text-gray-200'
+                          : 'text-gray-500 hover:text-gray-700'
+                        } px-3 py-2 font-medium text-sm rounded-md`}
                     >
                       {tab === 'user' && 'User Management'}
                       {tab === 'fee' && 'Fee Structure'}

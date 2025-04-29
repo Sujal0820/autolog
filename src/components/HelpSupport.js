@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Menu, Bell, Search, User, HelpCircle, Mail,Moon, Sun } from 'lucide-react';
+import { Menu, Bell, Search, User, HelpCircle, Mail, Moon, Sun } from 'lucide-react';
 import { useUser } from '../UserContext';
-import logo from './ui/logo.jpeg'; 
+import logo from './ui/images/logo.jpeg';
 
 const HelpSupport = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -29,19 +29,19 @@ const HelpSupport = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     // Create mailto link with form data
     const subject = `Support Request from ${formData.name}`;
     const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
     const mailtoLink = `mailto:sujaljamsandekar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    
+
     // Open mail client
     window.location.href = mailtoLink;
-    
+
     // Reset form and show success message
     setFormData({ name: '', email: '', message: '' });
     setFormSubmitted(true);
-    
+
     // Hide success message after 5 seconds
     setTimeout(() => {
       setFormSubmitted(false);
@@ -55,19 +55,19 @@ const HelpSupport = () => {
   const developers = [
     {
       name: 'Sujal Jamsandekar',
-      description: 'Lead Developer & Project Manager'
+      description: 'Frontend Developer & Project Manager'
     },
     {
       name: 'Aniket Mali',
-      description: 'Backend Developer & API Integration Specialist'
+      description: 'Backend Developer & API Integration'
     },
     {
       name: 'Aditya Khadke',
-      description: 'Frontend Developer & UI/UX Designer'
+      description: 'Database Designer & Documentation Lead'
     },
     {
       name: 'Ashutosh Jarag',
-      description: 'Database Engineer & System Administrator'
+      description: 'Image Recognition & ML Engineer'
     }
   ];
 
@@ -75,17 +75,8 @@ const HelpSupport = () => {
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
       <aside className={`bg-gray-800 text-white w-64 space-y-6 py-7 px-2 absolute inset-y-0 left-0 transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:relative md:translate-x-0 transition duration-200 ease-in-out`}>
-        {/* Logo placement */}
-        <div className="flex justify-center items-center mb-6 px-4">
-          {/* Replace with your actual logo */}
-          <div className="bg-gray-500 relative shadow-sm p-2 rounded-lg">
-            <h2 className="text-gray-800 font-bold text-xl"></h2>
-            {/* Uncomment and use this instead if you have an image logo */}
-            <img src={logo} alt="AutoLog Logo" className="h-20" />
-          </div>
-        </div>
-        
-        <nav>
+
+        <nav className='mt-20'>
           <button className="w-full text-left py-2 px-4 text-white hover:bg-gray-700" onClick={() => navigate('/dashboard')}>Dashboard</button>
           <button className="w-full text-left py-2 px-4 text-white hover:bg-gray-700" onClick={() => navigate('/vehicle-logs')}>Vehicle Logs</button>
           <button className="w-full text-left py-2 px-4 text-white hover:bg-gray-700" onClick={() => navigate('/manualentry')}>Manual Vehicle Entry</button>
@@ -107,18 +98,8 @@ const HelpSupport = () => {
             </div>
 
             <div className="flex items-center space-x-4">
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  className="pl-8 pr-2 py-1 rounded-full border border-gray-300"
-                />
-                <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-              </div>
 
-              <button className="p-2 rounded-full hover:bg-gray-200">
-                <Bell className="h-5 w-5" />
-              </button>
+
 
               <div className="relative">
                 <button
@@ -143,8 +124,8 @@ const HelpSupport = () => {
                   </div>
                 )}
                 <button onClick={toggleDarkMode} className={`p-2 rounded-full ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-200'}`}>
-                {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-              </button>
+                  {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                </button>
               </div>
             </div>
           </div>
@@ -160,13 +141,13 @@ const HelpSupport = () => {
                   <h3 className="text-lg font-semibold">Contact Support</h3>
                   <HelpCircle className="h-5 w-5 text-gray-400" />
                 </div>
-                
+
                 {formSubmitted ? (
                   <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
                     Your message has been sent successfully! We'll get back to you soon.
                   </div>
                 ) : null}
-                
+
                 <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
@@ -180,7 +161,7 @@ const HelpSupport = () => {
                       required
                     />
                   </div>
-                  
+
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
                     <input
@@ -193,7 +174,7 @@ const HelpSupport = () => {
                       required
                     />
                   </div>
-                  
+
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message</label>
                     <textarea
@@ -206,7 +187,7 @@ const HelpSupport = () => {
                       required
                     ></textarea>
                   </div>
-                  
+
                   <button
                     type="submit"
                     className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-150 ease-in-out flex items-center justify-center"
@@ -216,7 +197,7 @@ const HelpSupport = () => {
                   </button>
                 </form>
               </div>
-              
+
               {/* Our Team Section */}
               <div className="bg-white rounded-lg shadow-md p-6">
                 <h3 className="text-lg font-semibold mb-4">Meet Our Team</h3>
@@ -235,7 +216,7 @@ const HelpSupport = () => {
                 </div>
               </div>
             </div>
-            
+
             {/* FAQ Section */}
             <div className="bg-white rounded-lg shadow-md p-6 mb-8">
               <h3 className="text-lg font-semibold mb-4">Frequently Asked Questions</h3>

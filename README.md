@@ -1,70 +1,70 @@
-# Getting Started with Create React App
+# AutoLog 🚀📷
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**AutoLog** is a smart vehicle identification and logging system designed for modern parking facilities. It leverages advanced camera technology and Web Interface to automate vehicle detection, fee calculation, and log maintenance, providing a seamless and secure experience for both users and administrators.
 
-## Available Scripts
+🌐 **Live Demo**: [https://autolog-uen3.onrender.com](https://autolog-uen3.onrender.com)
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 📌 Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- 🔍 **Automatic Number Plate Recognition (ANPR)**
+- 🧾 **Automated Parking Fee Calculation** based on entry/exit time
+- 🖥️ **Admin Dashboard** for monitoring and logging vehicles
+- 🧑‍💻 **User-Friendly Interface** with dark mode toggle
+- 💾 **Secure Data Storage** for vehicle entry/exit logs
+- 📊 **Live Vehicle Tracking** and status updates
+- 🛡️ **Security Settings & User Management**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 💻 Tech Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 🌐 Frontend:
+- HTML, CSS, JavaScript
+- Bootstrap for UI components
+- Responsive web design
 
-### `npm run build`
+### 🧠 Backend:
+- Python (Flask)
+- Gemini
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 🗄️ Database:
+- PostgureSQL for log and user data storage
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🛠️ How It Works
 
-### `npm run eject`
+1. Camera captures vehicle image on entry.
+2. Our API processes the number plate and logs it with timestamp.
+3. On exit, the plate is re-identified and duration is calculated.
+4. Admin dashboard shows entry/exit records and calculates the fee.
+5. Data is stored and displayed securely on the dashboard.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 📸 Screenshots
+- Landing page
+  
+  ![image](https://github.com/user-attachments/assets/7336e9d1-743c-4956-86cc-b3a2b8268750)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Live OCR vehicle detection
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+  ![image](https://github.com/user-attachments/assets/6d191ac1-4263-4e26-846f-00bfa2496260)
 
-## Learn More
+- Admin dashboard
+  ![image](https://github.com/user-attachments/assets/8482c918-dec0-4632-8382-214786fa8fdf)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 👨‍💻 Team
+- Sujal Jamsandekar
+- Aniket Mali 
+- Aditya Khadke
+- Ashutosh Jarag 
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

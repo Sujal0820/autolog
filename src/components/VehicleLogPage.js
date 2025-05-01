@@ -52,7 +52,7 @@ const VehicleLogPage = () => {
 
   // Initialize Gemini API
   const apiKey = process.env.REACT_APP_GEMINI_API_KEY
-  const genAI = new GoogleGenerativeAI(apiKey || "AIzaSyDTtxPv61nJG9Rdcd-Oape6h4azQs1KZLQ")
+  const genAI = new GoogleGenerativeAI(apiKey)
 
 
 
